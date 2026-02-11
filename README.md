@@ -39,10 +39,7 @@ This command will automatically generate:
 
 ```bash
 # Create a module with a specific vendor/namespace
-php artisan modules:create my-module --vendor=MyCompany --namespace=MyApp\\MyModule
-
-# Create a module with a specific version
-php artisan modules:create my-module --version=2.0.0
+php artisan modules:create my-vendor/my-module
 ```
 
 ### Manual Module Structure
