@@ -332,7 +332,3 @@ vendor/bin/phpunit --testsuite=Feature
 - ✅ **Automatic autoloading**: Modules are autoloaded automatically when installed
 - ✅ **Service Providers**: Each module can have its own Service Provider
 - ✅ **Integrated commands**: Generate code inside modules using Artisan commands
-
-## TODO
-
-- [ ] Automatically add repository.path in modules
