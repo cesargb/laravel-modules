@@ -12,31 +12,10 @@ composer require --dev cesargb/laravel-modules
 
 ### 1. Configure the modules directory
 
-By default, modules are searched in the `modules/` directory at the project root. You can change this using an environment variable:
-
-```env
-MODULES_DIRECTORY=modules
-```
-
-Or publish and modify the configuration file:
-
-```bash
-php artisan vendor:publish --provider="Cesargb\Modules\ModuleServiceProvider"
-```
-
-### 2. Configure Composer for local repositories
-
 Add the repository configuration to your `composer.json`:
 
-```json
-{
-    "repositories": [
-        {
-            "type": "path",
-            "url": "modules/*"
-        }
-    ]
-}
+```bash
+php artisan modules:config
 ```
 
 ## Module Structure

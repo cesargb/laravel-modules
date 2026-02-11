@@ -28,6 +28,7 @@ use Cesargb\Modules\Console\Commands\Make\ScopeMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\TestMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\TraitMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ViewMakeCommand;
+use Cesargb\Modules\Console\Commands\ModulesConfigCommand;
 use Cesargb\Modules\Console\Commands\ModulesInstallCommand;
 use Cesargb\Modules\Console\Commands\ModulesListCommand;
 use Cesargb\Modules\Console\Commands\ModulesUninstallCommand;
@@ -41,6 +42,7 @@ class ModuleServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                ModulesConfigCommand::class,
                 ModulesListCommand::class,
                 ModulesInstallCommand::class,
                 ModulesUninstallCommand::class,
