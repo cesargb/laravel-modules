@@ -1,0 +1,5 @@
+<?php
+
+return [
+    'module_name' => '{{MODULE_NAME_LOWER}}',
+];

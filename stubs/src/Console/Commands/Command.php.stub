@@ -1,0 +1,17 @@
+<?php
+
+namespace {{VENDOR}}\{{MODULE_NAME}}\Console\Commands;
+
+use Illuminate\Console\Command;
+
+class {{COMMAND_NAME}} extends Command
+{
+    protected $signature = 'module:{{MODULE_NAME_LOWER}}';
+
+    protected $description = '{{MODULE_NAME}} command for module testing';
+
+    public function handle()
+    {
+        $this->info('{{MODULE_NAME}} command executed successfully!');
+    }
+}
