@@ -18,9 +18,36 @@ Add the repository configuration to your `composer.json`:
 php artisan modules:config
 ```
 
-## Module Structure
+## Creating a New Module
 
-Each module must have its own `composer.json` and follow this structure:
+### Using the create command
+
+The easiest way to create a new module is using the `modules:create` command:
+
+```bash
+php artisan modules:create my-vendor/my-module
+```
+
+This command will automatically generate:
+
+- The module directory structure (`modules/my-module/`)
+- A `composer.json` file with proper configuration
+- A `src/` directory for your module classes
+- A Service Provider for the module
+
+#### Command options
+
+```bash
+# Create a module with a specific vendor/namespace
+php artisan modules:create my-module --vendor=MyCompany --namespace=MyApp\\MyModule
+
+# Create a module with a specific version
+php artisan modules:create my-module --version=2.0.0
+```
+
+### Manual Module Structure
+
+If you prefer to create the module manually, each module must have its own `composer.json` and follow this structure:
 
 ```text
 modules/
@@ -29,28 +56,6 @@ modules/
     └── src/
         ├── MyModuleServiceProvider.php
         └── ... (module classes)
-```
-
-### Example module composer.json
-
-```json
-{
-    "name": "my-company/my-module",
-    "version": "1.0.0",
-    "type": "library",
-    "autoload": {
-        "psr-4": {
-            "MyCompany\\MyModule\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "MyCompany\\MyModule\\MyModuleServiceProvider"
-            ]
-        }
-    }
-}
 ```
 
 ## Module Management Commands
