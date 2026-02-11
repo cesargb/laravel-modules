@@ -21,13 +21,4 @@ class ConfigTest extends TestCase
         $this->assertStringEndsWith('modules', $path);
         $this->assertStringContainsString(base_path(), $path);
     }
-
-    public function test_can_override_modules_directory_with_config(): void
-    {
-        config(['laravel-modules.modules_directory' => 'custom-modules']);
-
-        $directory = Config::directory();
-
-        $this->assertEquals('custom-modules', $directory);
-    }
 }

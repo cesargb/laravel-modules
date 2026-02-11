@@ -35,12 +35,7 @@ use Illuminate\Support\ServiceProvider;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'laravel-modules'
-        );
-    }
+    public function register() {}
 
     public function boot()
     {

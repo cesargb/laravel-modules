@@ -6,7 +6,7 @@ class Config
 {
     public static function directory(): string
     {
-        return config('laravel-modules.modules_directory', 'modules');
+        return 'modules';
     }
 
     public static function path(): string
