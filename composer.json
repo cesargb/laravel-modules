@@ -1,0 +1,33 @@
+{
+    "name": "cesargb/laravel-modules",
+    "version": "0.1.0",
+    "require": {
+        "composer/composer": "^2.9"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0",
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cesargb\\Modules\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cesargb\\Modules\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cesargb\\Modules\\ModuleServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+}
