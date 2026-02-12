@@ -24,18 +24,21 @@ class ModulesInstallCommand extends Command
     {
         $module = Modules::get($moduleName);
 
-        if (!$module) {
+        if (! $module) {
             $this->error("Module {$moduleName} not found.");
+
             return;
         }
 
         if ($module->installed) {
             $this->info("Module {$moduleName} is already installed.");
+
             return;
         }
 
-        if (!$module->install()) {
+        if (! $module->install()) {
             $this->error("Failed to install module {$moduleName}.");
+
             return;
         }
 
