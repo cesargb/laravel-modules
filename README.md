@@ -2,6 +2,10 @@
 
 A local module management system for Laravel using Composer. Organize your application into independent modules that are installed and uninstalled as Composer packages using `path` type repositories.
 
+<video autoplay loop muted playsinline>
+  <source src="art/laravel-modules-promotion.webm" type="video/webm">
+</video>
+
 ## Installation
 
 ```bash
