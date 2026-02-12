@@ -87,7 +87,7 @@ class Modules
 
     public static function isInstalled(string $name): bool
     {
-        return in_array($name, array_column(static::packagesInstalled(), 'name'));
+        return in_array($name, array_column(self::packagesInstalled(), 'name'));
     }
 
     public static function install(string $name): bool
@@ -100,7 +100,7 @@ class Modules
 
         $installed = Composer::require($module->packageName);
 
-        static::$cachedModules = null;
+        self::$cachedModules = null;
 
         return $installed;
     }
@@ -115,7 +115,7 @@ class Modules
 
         $uninstalled = Composer::remove($module->packageName);
 
-        static::$cachedModules = null;
+        self::$cachedModules = null;
 
         return $uninstalled;
     }
