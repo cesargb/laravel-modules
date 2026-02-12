@@ -1,6 +1,12 @@
 {
     "name": "cesargb/laravel-modules",
-    "version": "0.1.0",
+    "description": "Organize your Laravel application into independent local modules using Composer path repositories",
+    "type": "library",
+    "keywords": [
+        "laravel-package",
+        "modular-architecture"
+    ],
+    "license": "MIT",
     "require": {
         "composer/composer": "^2.9"
     },
