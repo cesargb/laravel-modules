@@ -42,6 +42,40 @@ This command will automatically generate:
 php artisan modules:create my-vendor/my-module
 ```
 
+### Downloading from a Git Repository
+
+You can also download an existing module from a Git repository:
+
+```bash
+php artisan modules:download https://github.com/vendor/module-name.git
+```
+
+This command will clone the repository into your modules directory.
+
+#### Command options
+
+```bash
+# Download from a specific branch
+php artisan modules:download https://github.com/vendor/module-name.git --branch=development
+
+# Download from a specific tag
+php artisan modules:download https://github.com/vendor/module-name.git --tag=v1.0.0
+
+# Specify a custom directory name
+php artisan modules:download https://github.com/vendor/module-name.git --name=custom-name
+
+# Combine options
+php artisan modules:download https://github.com/vendor/module-name.git --branch=main --name=my-module
+```
+
+**Note:** You cannot specify both `--branch` and `--tag` options at the same time.
+
+After downloading, if the module contains a `composer.json` file, you can install it:
+
+```bash
+php artisan modules:install module-name
+```
+
 ### Manual Module Structure
 
 If you prefer to create the module manually, each module must have its own `composer.json` and follow this structure:
@@ -56,6 +90,17 @@ modules/
 ```
 
 ## Module Management Commands
+
+### Download modules from Git
+
+Download an existing module from a Git repository:
+
+```bash
+php artisan modules:download https://github.com/vendor/module-name.git
+php artisan modules:download https://github.com/vendor/module-name.git --branch=development
+php artisan modules:download https://github.com/vendor/module-name.git --tag=v1.0.0
+php artisan modules:download https://github.com/vendor/module-name.git --name=custom-name
+```
 
 ### List available modules
 
@@ -254,13 +299,25 @@ $module->uninstall();
 
 ## Complete Example
 
-### 1. Create the module structure
+### Option 1: Download from Git
+
+```bash
+# Download an existing module from a Git repository
+php artisan modules:download https://github.com/my-vendor/blog-module.git --name=blog
+
+# Install the module
+php artisan modules:install blog
+```
+
+### Option 2: Create from scratch
+
+#### 1. Create the module structure
 
 ```bash
 mkdir -p modules/blog/src
 ```
 
-### 2. Create the module's composer.json
+#### 2. Create the module's composer.json
 
 ```json
 {
@@ -282,13 +339,13 @@ mkdir -p modules/blog/src
 }
 ```
 
-### 3. Install the module
+#### 3. Install the module
 
 ```bash
 php artisan modules:install blog
 ```
 
-### 4. Create module components
+#### 4. Create module components
 
 ```bash
 php artisan module:make:model blog Post

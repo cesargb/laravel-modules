@@ -30,6 +30,7 @@ use Cesargb\Modules\Console\Commands\Make\TraitMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ViewMakeCommand;
 use Cesargb\Modules\Console\Commands\ModulesConfigCommand;
 use Cesargb\Modules\Console\Commands\ModulesCreateCommand;
+use Cesargb\Modules\Console\Commands\ModulesDownloadCommand;
 use Cesargb\Modules\Console\Commands\ModulesInstallCommand;
 use Cesargb\Modules\Console\Commands\ModulesListCommand;
 use Cesargb\Modules\Console\Commands\ModulesUninstallCommand;
@@ -45,6 +46,7 @@ class ModuleServiceProvider extends ServiceProvider
             $this->commands([
                 ModulesConfigCommand::class,
                 ModulesCreateCommand::class,
+                ModulesDownloadCommand::class,
                 ModulesListCommand::class,
                 ModulesInstallCommand::class,
                 ModulesUninstallCommand::class,

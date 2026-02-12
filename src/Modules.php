@@ -29,7 +29,7 @@ class Modules
             return new Module(
                 name: $moduleName,
                 packageName: $package['name'],
-                version: $package['version'] ? '^'.$package['version'] : '*',
+                version: ($package['version'] ?? false) ? '^'.$package['version'] : '*',
                 installed: static::isInstalled($package['name']),
                 namespace: $namespace,
             );
