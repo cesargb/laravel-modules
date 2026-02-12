@@ -33,6 +33,7 @@ use Cesargb\Modules\Console\Commands\ModulesCreateCommand;
 use Cesargb\Modules\Console\Commands\ModulesDownloadCommand;
 use Cesargb\Modules\Console\Commands\ModulesInstallCommand;
 use Cesargb\Modules\Console\Commands\ModulesListCommand;
+use Cesargb\Modules\Console\Commands\ModulesRemoveCommand;
 use Cesargb\Modules\Console\Commands\ModulesUninstallCommand;
 use Illuminate\Support\ServiceProvider;
 
@@ -49,6 +50,7 @@ class ModuleServiceProvider extends ServiceProvider
                 ModulesDownloadCommand::class,
                 ModulesListCommand::class,
                 ModulesInstallCommand::class,
+                ModulesRemoveCommand::class,
                 ModulesUninstallCommand::class,
                 MakeCommand::class,
                 CastMakeCommand::class,

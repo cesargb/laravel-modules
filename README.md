@@ -128,6 +128,20 @@ php artisan modules:uninstall my-module
 php artisan modules:uninstall module1 module2
 ```
 
+### Remove modules
+
+Remove one or more modules from the modules directory. If the module is installed, it will be uninstalled first:
+
+```bash
+php artisan modules:remove my-module
+php artisan modules:remove module1 module2
+
+# Force removal without confirmation
+php artisan modules:remove my-module --force
+```
+
+**Note:** This command will permanently delete the module directory. Use with caution.
+
 ## Make Commands
 
 All `module:make:*` commands follow the pattern: `php artisan module:make:{type} {module-name} {Name}`

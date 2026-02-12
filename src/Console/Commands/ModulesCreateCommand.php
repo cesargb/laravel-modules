@@ -113,7 +113,7 @@ class ModulesCreateCommand extends Command
             'src/Console/Commands/Command.php.stub' => 'src/Console/Commands/'.$replacements['{{COMMAND_NAME}}'].'.php',
             'config/config.php.stub' => 'config/config.php',
             '.github/workflows/tests.yml.stub' => '.github/workflows/tests.yml',
-            '.github/workflows/list.yml.stub' => '.github/workflows/lint.yml',
+            '.github/workflows/lint.yml.stub' => '.github/workflows/lint.yml',
             '.github/workflows/static-analysis.yml.stub' => '.github/workflows/static-analysis.yml',
             'tests/TestCase.php.stub' => 'tests/TestCase.php',
             'tests/Unit/ExampleTest.php.stub' => 'tests/Unit/ExampleTest.php',
