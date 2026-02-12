@@ -8,7 +8,13 @@
     ],
     "license": "MIT",
     "require": {
-        "composer/composer": "^2.9"
+        "php": "^8.4",
+        "composer/composer": "^2.9",
+        "illuminate/console": "^12.0",
+        "illuminate/filesystem": "^12.0",
+        "illuminate/foundation": "^12.0",
+        "illuminate/process": "^12.0",
+        "illuminate/support": "^12.0"
     },
     "require-dev": {
         "orchestra/testbench": "^10.0",
