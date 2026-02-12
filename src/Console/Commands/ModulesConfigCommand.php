@@ -2,6 +2,7 @@
 
 namespace Cesargb\Modules\Console\Commands;
 
+use Cesargb\Modules\Composer;
 use Cesargb\Modules\Config;
 use Illuminate\Console\Command;
 
@@ -13,6 +14,10 @@ class ModulesConfigCommand extends Command
 
     public function handle()
     {
+        if (! $this->checkRequirements()) {
+            return 1;
+        }
+
         if ($this->repositoryExists()) {
             $this->info('The repository already exists in composer.json.');
 
@@ -22,6 +27,36 @@ class ModulesConfigCommand extends Command
         $this->addRepository();
 
         $this->info('Repository added to composer.json successfully.');
+    }
+
+    private function checkRequirements(): bool
+    {
+        $this->info('Checking requirements...');
+
+        $allChecksPassed = true;
+
+        $this->line('  - Checking composer.json exists...');
+        if (! file_exists(base_path('composer.json'))) {
+            $this->error('    ✗ composer.json file not found.');
+            $allChecksPassed = false;
+        } else {
+            $this->info('    ✓ composer.json found.');
+        }
+
+        $this->line('  - Checking Composer version...');
+        $version = Composer::getVersion();
+        $majorVersion = (int) explode('.', $version)[0];
+
+        if ($majorVersion < 2) {
+            $this->error('    ✗ Composer version 2 or higher is required. Current version: '.$version);
+            $allChecksPassed = false;
+        } else {
+            $this->info('    ✓ Composer version '.$version.' detected.');
+        }
+
+        $this->newLine();
+
+        return $allChecksPassed;
     }
 
     private function repositoryExists(): bool

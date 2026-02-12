@@ -2,9 +2,6 @@
 
 namespace Cesargb\Modules;
 
-use Composer\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-
 class Modules
 {
     private static ?array $cachedModules = null;
@@ -101,18 +98,11 @@ class Modules
 
         $module = static::get($name);
 
-        $application = new Application;
-        $application->setAutoExit(false);
-
-        $input = new ArrayInput([
-            'command' => 'require',
-            'packages' => [$module->packageName],
-            '--no-interaction' => true,
-        ]);
+        $installed = Composer::require($module->packageName);
 
         static::$cachedModules = null;
 
-        return $application->run($input) === 0;
+        return $installed;
     }
 
     public static function uninstall(string $name): bool
@@ -123,18 +113,11 @@ class Modules
 
         $module = static::get($name);
 
-        $application = new Application;
-        $application->setAutoExit(false);
-
-        $input = new ArrayInput([
-            'command' => 'remove',
-            'packages' => [$module->packageName],
-            '--no-interaction' => true,
-        ]);
+        $uninstalled = Composer::remove($module->packageName);
 
         static::$cachedModules = null;
 
-        return $application->run($input) === 0;
+        return $uninstalled;
     }
 
     private static function packagesInstalled(): array
