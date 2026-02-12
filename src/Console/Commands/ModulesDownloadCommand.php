@@ -59,12 +59,12 @@ class ModulesDownloadCommand extends Command
             return 1;
         }
 
-        $this->info("Repository downloaded successfully!");
+        $this->info('Repository downloaded successfully!');
         $this->comment("Location: {$targetPath}");
 
         if ($this->hasComposerJson($targetPath)) {
             $this->newLine();
-            $this->info("Found composer.json in the downloaded module.");
+            $this->info('Found composer.json in the downloaded module.');
             $this->comment("You can install it using: php artisan modules:install {$directoryName}");
         }
 
