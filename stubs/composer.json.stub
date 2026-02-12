@@ -1,10 +1,27 @@
 {
     "name": "{{VENDOR_LOWER}}/{{MODULE_NAME_LOWER}}",
+    "description": "A Laravel module for {{MODULE_NAME_LOWER}}",
     "version": "0.1.0",
+    "type": "library",
+    "keywords": ["laravel", "module", "{{MODULE_NAME_LOWER}}"],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "{{VENDOR}}\\{{MODULE_NAME}}\\": "src"
+            "{{VENDOR}}\\{{MODULE_NAME}}\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "{{VENDOR}}\\{{MODULE_NAME}}\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.4"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "orchestra/testbench": "^10.0",
+        "phpunit/phpunit": "^11.0"
     },
     "extra": {
         "laravel": {
@@ -12,6 +29,10 @@
                 "{{VENDOR}}\\{{MODULE_NAME}}\\{{MODULE_NAME}}ServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "analyse": "vendor/bin/phpstan analyse"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

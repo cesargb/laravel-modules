@@ -13,6 +13,7 @@ class ModulesInstallCommand extends Command
 
     public function handle()
     {
+        ini_set('memory_limit', '300M');
         $moduleNames = $this->argument('module');
 
         foreach ($moduleNames as $moduleName) {

@@ -1,0 +1,35 @@
+# {{MODULE_NAME}}
+
+A Laravel module for {{MODULE_NAME_LOWER}}.
+
+## Installation
+
+This module is part of a local modules system. To install:
+
+```bash
+php artisan modules:install {{MODULE_NAME_LOWER}}
+```
+
+## Usage
+
+Add your usage documentation here.
+
+## Testing
+
+```bash
+composer test
+```
+
+## Code Quality
+
+```bash
+# Run PHPStan
+composer analyse
+
+# Run code style fixer
+composer format
+```
+
+## License
+
+Add your license information here.

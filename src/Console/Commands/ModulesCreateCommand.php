@@ -88,6 +88,11 @@ class ModulesCreateCommand extends Command
             $moduleDirectory.'/src/Console',
             $moduleDirectory.'/src/Console/Commands',
             $moduleDirectory.'/config',
+            $moduleDirectory.'/tests',
+            $moduleDirectory.'/tests/Unit',
+            $moduleDirectory.'/tests/Feature',
+            $moduleDirectory.'/.github',
+            $moduleDirectory.'/.github/workflows',
         ];
 
         foreach ($directories as $directory) {
@@ -100,9 +105,20 @@ class ModulesCreateCommand extends Command
         $files = [
             'composer.json.stub' => 'composer.json',
             '.gitignore.stub' => '.gitignore',
+            '.gitattributes.stub' => '.gitattributes',
+            'phpunit.xml.stub' => 'phpunit.xml',
+            'phpstan.neon.stub' => 'phpstan.neon',
+            'README.md.stub' => 'README.md',
             'src/ServiceProvider.php.stub' => 'src/'.$replacements['{{MODULE_NAME}}'].'ServiceProvider.php',
             'src/Console/Commands/Command.php.stub' => 'src/Console/Commands/'.$replacements['{{COMMAND_NAME}}'].'.php',
             'config/config.php.stub' => 'config/config.php',
+            '.github/workflows/tests.yml.stub' => '.github/workflows/tests.yml',
+            '.github/workflows/list.yml.stub' => '.github/workflows/lint.yml',
+            '.github/workflows/static-analysis.yml.stub' => '.github/workflows/static-analysis.yml',
+            'tests/TestCase.php.stub' => 'tests/TestCase.php',
+            'tests/Unit/ExampleTest.php.stub' => 'tests/Unit/ExampleTest.php',
+            'tests/Unit/.gitkeep.stub' => 'tests/Unit/.gitkeep',
+            'tests/Feature/.gitkeep.stub' => 'tests/Feature/.gitkeep',
         ];
 
         foreach ($files as $stub => $destination) {
