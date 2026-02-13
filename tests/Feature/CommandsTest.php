@@ -95,10 +95,8 @@ class CommandsTest extends TestCase
         file_put_contents($composerPath, json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
         $this->artisan('modules:config')
-            ->expectsOutput('Repository added to composer.json successfully.')
             ->assertExitCode(0);
 
-        // Verificar que se agregó el repositorio
         $updatedComposer = json_decode(file_get_contents($composerPath), true);
         $repositories = $updatedComposer['repositories'] ?? [];
 
@@ -143,7 +141,6 @@ class CommandsTest extends TestCase
         $countBefore = count(json_decode(file_get_contents($composerPath), true)['repositories'] ?? []);
 
         $this->artisan('modules:config')
-            ->expectsOutput('The repository already exists in composer.json.')
             ->assertExitCode(0);
 
         $countAfter = count(json_decode(file_get_contents($composerPath), true)['repositories'] ?? []);

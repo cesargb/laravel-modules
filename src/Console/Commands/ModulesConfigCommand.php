@@ -78,7 +78,7 @@ class ModulesConfigCommand extends Command
     {
         $message = 'Path repository for modules already exists in composer.json';
 
-        if ($this->repositoryExists()) {
+        if (! $this->repositoryExists()) {
             $pass = $this->addRepository();
             $message = $pass
                 ? 'Path repository for modules added to composer.json'
