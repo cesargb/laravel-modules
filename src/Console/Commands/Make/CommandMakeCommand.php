@@ -5,7 +5,7 @@ namespace Cesargb\Modules\Console\Commands\Make;
 use Cesargb\Modules\Console\CommandMakeNamespacePathResolver;
 use Illuminate\Foundation\Console\ConsoleMakeCommand;
 
-class MakeCommand extends ConsoleMakeCommand
+class CommandMakeCommand extends ConsoleMakeCommand
 {
     use CommandMakeNamespacePathResolver;
 

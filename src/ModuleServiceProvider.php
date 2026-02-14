@@ -7,6 +7,7 @@ use Cesargb\Modules\Console\Commands\Make\ChannelMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ClassMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ComponentMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ConfigMakeCommand;
+use Cesargb\Modules\Console\Commands\Make\ControllerMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\EnumMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\EventMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ExceptionMakeCommand;
@@ -15,7 +16,7 @@ use Cesargb\Modules\Console\Commands\Make\JobMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\JobMiddlewareMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ListenerMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\MailMakeCommand;
-use Cesargb\Modules\Console\Commands\Make\MakeCommand;
+use Cesargb\Modules\Console\Commands\Make\CommandMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ModelMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\NotificationMakeCommand;
 use Cesargb\Modules\Console\Commands\Make\ObserverMakeCommand;
@@ -52,12 +53,13 @@ class ModuleServiceProvider extends ServiceProvider
                 ModulesInstallCommand::class,
                 ModulesRemoveCommand::class,
                 ModulesUninstallCommand::class,
-                MakeCommand::class,
+                CommandMakeCommand::class,
                 CastMakeCommand::class,
                 ChannelMakeCommand::class,
                 ClassMakeCommand::class,
                 ComponentMakeCommand::class,
                 ConfigMakeCommand::class,
+                ControllerMakeCommand::class,
                 EnumMakeCommand::class,
                 EventMakeCommand::class,
                 ExceptionMakeCommand::class,

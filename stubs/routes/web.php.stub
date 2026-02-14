@@ -1,0 +1,7 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+// Route::get('/{{MODULE_NAME_LOWER}}', function () {
+//     return '{{MODULE_NAME}} module route';
+// });
