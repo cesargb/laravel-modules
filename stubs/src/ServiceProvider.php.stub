@@ -15,5 +15,12 @@ class {{MODULE_NAME}}ServiceProvider extends ServiceProvider
     public function boot() {
         // $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', '{{MODULE_NAME_LOWER}}');
+        // $this->loadTranslationsFrom(__DIR__.'/../lang', '{{MODULE_NAME_LOWER}}');
+        // $this->loadJsonTranslationsFrom(__DIR__.'/../lang');
+
+        // if ($this->app->runningInConsole()) {
+        //     $this->commands([
+        //     ]);
+        // }
     }
 }
