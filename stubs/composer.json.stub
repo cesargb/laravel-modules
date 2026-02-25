@@ -28,6 +28,9 @@
             "providers": [
                 "{{VENDOR}}\\{{MODULE_NAME}}\\{{MODULE_NAME}}ServiceProvider"
             ]
+        },
+        "laravel-module": {
+            "origin": "local"
         }
     },
     "scripts": {

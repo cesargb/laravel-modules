@@ -32,6 +32,7 @@ class Modules
                 version: ($package['version'] ?? false) ? '^'.$package['version'] : '*',
                 installed: static::isInstalled($package['name']),
                 namespace: $namespace,
+                origin : $package['extra']['laravel-module']['origin'] ?? 'download'
             );
         }, $modules ?: []);
 

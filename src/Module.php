@@ -9,7 +9,8 @@ class Module
         public readonly string $packageName,
         public readonly string $version,
         public readonly bool $installed,
-        public readonly string $namespace
+        public readonly string $namespace,
+        public readonly string $origin
     ) {}
 
     public function install(): bool
