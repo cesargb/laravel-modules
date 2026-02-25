@@ -14,7 +14,8 @@ class ModuleTest extends TestCase
             packageName: 'vendor/test-module',
             version: '^1.0.0',
             installed: false,
-            namespace: 'Vendor\\TestModule\\'
+            namespace: 'Vendor\\TestModule\\',
+            origin: 'local'
         );
 
         $this->assertEquals('test-module', $module->name);
@@ -31,7 +32,8 @@ class ModuleTest extends TestCase
             packageName: 'vendor/test-module',
             version: '^1.0.0',
             installed: true,
-            namespace: 'Vendor\\TestModule\\'
+            namespace: 'Vendor\\TestModule\\',
+            origin: 'local'
         );
 
         $result = $module->install();
@@ -46,7 +48,8 @@ class ModuleTest extends TestCase
             packageName: 'vendor/test-module',
             version: '^1.0.0',
             installed: false,
-            namespace: 'Vendor\\TestModule\\'
+            namespace: 'Vendor\\TestModule\\',
+            origin: 'local'
         );
 
         $result = $module->uninstall();
