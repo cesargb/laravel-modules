@@ -27,7 +27,7 @@ class ModulesListCommand extends Command
         foreach ($modules as $module) {
             $this->components->twoColumnDetail(
                 "<options=bold>{$module->name}</> <fg=gray>{$module->packageName}:{$module->version}</>",
-                $module->installed ? '<fg=green>INSTALLED</>' : '<fg=yellow>NOT INSTALLED</>',
+                $module->installed ? '<fg=green;options=bold>INSTALLED</>' : '<fg=yellow>Available</>',
             );
         }
 
