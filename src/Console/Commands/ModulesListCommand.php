@@ -20,17 +20,19 @@ class ModulesListCommand extends Command
 
             return;
         }
+        $this->newLine();
+        $this->info('Available modules:');
+        $this->newLine();
 
-        $this->table(
-            ['Name', 'Package', 'Version', 'Installed'],
-            array_map(function ($module) {
-                return [
-                    $module->name,
-                    $module->packageName,
-                    $module->version,
-                    $module->installed ? '<fg=green>✓</>' : '<fg=red>✗</>',
-                ];
-            }, $modules)
-        );
+        foreach ($modules as $module) {
+            $this->components->twoColumnDetail(
+                "<options=bold>{$module->name}</> <fg=gray>{$module->packageName}:{$module->version}</>",
+                $module->installed ? '<fg=green>INSTALLED</>' : '<fg=yellow>NOT INSTALLED</>',
+            );
+        }
+
+        $this->newLine();
+
+        return self::SUCCESS;
     }
 }
