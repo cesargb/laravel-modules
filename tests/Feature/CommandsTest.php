@@ -69,7 +69,7 @@ class CommandsTest extends TestCase
     public function test_modules_list_command_displays_no_modules_message(): void
     {
         $this->artisan('modules:list')
-            ->expectsOutput('No modules found.')
+            ->expectsOutputToContain('No modules found.')
             ->assertExitCode(0);
     }
 

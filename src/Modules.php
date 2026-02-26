@@ -17,7 +17,7 @@ class Modules
 
         $modules = glob(Config::path().'/*/composer.json');
 
-        $installedByName = array_column(static::packagesInstalled(), null, 'name');
+        $installedByName = array_column(self::packagesInstalled(), null, 'name');
 
         self::$cachedModules = array_map(function ($composerJsonPath) use ($installedByName) {
             $moduleName = basename(dirname($composerJsonPath));
@@ -110,7 +110,7 @@ class Modules
         self::$cachedModules = null;
 
         if ($installed) {
-            static::addTestsNamespaceToComposer($module);
+            self::addTestsNamespaceToComposer($module);
         }
 
         return $installed;
@@ -181,7 +181,7 @@ class Modules
         self::$cachedModules = null;
 
         if ($uninstalled) {
-            static::removeTestsNamespaceFromComposer($module);
+            self::removeTestsNamespaceFromComposer($module);
         }
 
         return $uninstalled;
