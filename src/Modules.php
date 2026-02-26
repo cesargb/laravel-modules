@@ -238,6 +238,11 @@ class Modules
     private static function packagesInstalled(): array
     {
         $installedFile = base_path('vendor/composer/installed.json');
+
+        if (! file_exists($installedFile)) {
+            return [];
+        }
+
         $installed = json_decode(file_get_contents($installedFile), true);
 
         return array_filter($installed['packages'] ?? $installed, function ($package) {

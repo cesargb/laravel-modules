@@ -1,10 +1,14 @@
-# Laravel Modules App
-
-A local module management system for Laravel using Composer. Organize your application into independent modules that are installed and uninstalled as Composer packages using `path` type repositories.
-
 <p align="center">
 <img src="art/laravel-modules.webp" alt="Laravel Modules" width="600" height="400">
 </p>
+
+[![tests](https://github.com/cesargb/laravel-modules/actions/workflows/tests.yml/badge.svg)](https://github.com/cesargb/laravel-modules/actions/workflows/tests.yml)
+[![static analysis](https://github.com/cesargb/laravel-modules/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/cesargb/laravel-modules/actions/workflows/static-analysis.yml)
+[![lint](https://github.com/cesargb/laravel-modules/actions/workflows/lint.yml/badge.svg)](https://github.com/cesargb/laravel-modules/actions/workflows/lint.yml)
+
+# Laravel Modules App
+
+A local module management system for Laravel using Composer. Organize your application into independent modules that are installed and uninstalled as Composer packages using `path` type repositories.
 
 ## Installation
 
