@@ -16,9 +16,20 @@ class ModulesListCommand extends Command
         $modules = new Modules()->all();
 
         if (empty($modules)) {
-            $this->info('No modules found.');
+            $this->components->warn('No modules found.');
+            $this->newLine();
+            $this->line('  <options=bold>Get started by creating or installing a module:</>');
+            $this->newLine();
+            $this->line('  <fg=green>Create a new module:</>');
+            $this->line('    php artisan modules:create <fg=yellow>vendor/module-name</>');
+            $this->newLine();
+            $this->line('  <fg=green>Install an existing module:</>');
+            $this->line('    php artisan modules:install <fg=yellow>module-name</>');
+            $this->newLine();
+            $this->line('  <fg=gray>For more information, see the README.md file.</>');
+            $this->newLine();
 
-            return;
+            return self::SUCCESS;
         }
         $this->newLine();
         $this->info('Available modules:');

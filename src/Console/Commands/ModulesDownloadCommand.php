@@ -62,6 +62,8 @@ class ModulesDownloadCommand extends Command
         $this->info('Repository downloaded successfully!');
         $this->comment("Location: {$targetPath}");
 
+        $this->registerModuleInComposer($directoryName, $repo);
+
         if ($this->hasComposerJson($targetPath)) {
             $this->newLine();
             $this->info('Found composer.json in the downloaded module.');
@@ -69,6 +71,35 @@ class ModulesDownloadCommand extends Command
         }
 
         return 0;
+    }
+
+    private function registerModuleInComposer(string $moduleName, string $repo): void
+    {
+        $composerPath = base_path('composer.json');
+
+        if (! file_exists($composerPath)) {
+            $this->warn('composer.json not found, skipping registration.');
+
+            return;
+        }
+
+        $composer = json_decode(file_get_contents($composerPath), true);
+
+        if (isset($composer['extra']['laravel_modules'][$moduleName])) {
+            return;
+        }
+
+        $composer['extra']['laravel_modules'][$moduleName] = [
+            'origin' => 'vsc',
+            'url'    => $repo,
+        ];
+
+        file_put_contents(
+            $composerPath,
+            json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n"
+        );
+
+        $this->line("Registered module {$moduleName} in composer.json");
     }
 
     private function isValidGitUrl(string $url): bool

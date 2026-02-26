@@ -40,12 +40,40 @@ class ModulesCreateCommand extends Command
 
         $this->createModuleStructure($moduleDirectory, $replacements);
 
+        $this->registerModuleInComposer($moduleName);
+
         $this->info("Module {$package} created successfully!");
         $this->comment("Location: {$moduleDirectory}");
 
         $this->installModule($moduleName);
 
         return 0;
+    }
+
+    private function registerModuleInComposer(string $moduleName): void
+    {
+        $composerPath = base_path('composer.json');
+
+        if (! file_exists($composerPath)) {
+            $this->warn('composer.json not found, skipping registration.');
+
+            return;
+        }
+
+        $composer = json_decode(file_get_contents($composerPath), true);
+
+        if (isset($composer['extra']['laravel_modules'][$moduleName])) {
+            return;
+        }
+
+        $composer['extra']['laravel_modules'][$moduleName]['origin'] = 'local';
+
+        file_put_contents(
+            $composerPath,
+            json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n"
+        );
+
+        $this->line("Registered module {$moduleName} in composer.json");
     }
 
     private function installModule(string $moduleName): void
