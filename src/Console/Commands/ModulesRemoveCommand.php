@@ -10,68 +10,59 @@ use Illuminate\Support\Facades\File;
 class ModulesRemoveCommand extends Command
 {
     protected $signature = 'modules:remove
-                                    {module* : The name of the module to remove}
+                                    {module : The name of the module to remove}
                                     {--force : Force removal without confirmation}';
 
-    protected $description = 'Remove one or more modules from the modules directory';
+    protected $description = 'Delete a module, uninstalling it first if needed';
 
     public function handle()
     {
-        $moduleNames = $this->argument('module');
+        $moduleName = $this->argument('module');
 
-        foreach ($moduleNames as $moduleName) {
-            $this->removeModule($moduleName);
-        }
-
-        return 0;
-    }
-
-    private function removeModule(string $moduleName): void
-    {
         $module = Modules::get($moduleName);
 
         if (! $module) {
-            $this->error("Module {$moduleName} not found.");
+            $this->components->error("Module [{$moduleName}] not found.");
 
-            return;
+            return self::FAILURE;
+        }
+
+        if ($module->installed) {
+            $this->components->warn("Module [{$moduleName}] is currently installed.");
+
+            if (! $this->option('force')) {
+                if (! $this->confirm("Uninstall and delete module [{$moduleName}]?", false)) {
+                    $this->components->info('Deletion cancelled.');
+
+                    return self::SUCCESS;
+                }
+            }
+
+            if (! $module->uninstall()) {
+                $this->components->error("Failed to uninstall module [{$moduleName}]. Deletion cancelled.");
+
+                return self::FAILURE;
+            }
+
+            $this->components->info("Module [{$moduleName}] uninstalled successfully.");
+        } elseif (! $this->option('force')) {
+            if (! $this->confirm("Delete module [{$moduleName}]?", false)) {
+                $this->components->info('Deletion cancelled.');
+
+                return self::SUCCESS;
+            }
         }
 
         $modulePath = Config::path().'/'.$moduleName;
 
-        if (! is_dir($modulePath)) {
-            $this->error("Module directory does not exist: {$modulePath}");
-
-            return;
-        }
-
-        if (! $this->option('force')) {
-            if (! $this->confirm("Are you sure you want to remove module {$moduleName}?", false)) {
-                $this->comment('Module removal cancelled.');
-
-                return;
-            }
-        }
-
-        if ($module->installed) {
-            $this->info("Module {$moduleName} is installed. Uninstalling first...");
-
-            if (! $module->uninstall()) {
-                $this->error("Failed to uninstall module {$moduleName}. Removal cancelled.");
-
-                return;
-            }
-
-            $this->comment("Module {$moduleName} uninstalled successfully.");
-        }
-
-        $this->info("Removing module directory: {$modulePath}");
-
         if (! File::deleteDirectory($modulePath)) {
-            $this->error("Failed to remove module directory: {$modulePath}");
+            $this->components->error("Failed to delete module directory [{$modulePath}].");
 
-            return;
+            return self::FAILURE;
         }
 
-        $this->info("Module {$moduleName} removed successfully.");
+        $this->components->success("Module [{$moduleName}] deleted successfully.");
+
+        return self::SUCCESS;
     }
 }
