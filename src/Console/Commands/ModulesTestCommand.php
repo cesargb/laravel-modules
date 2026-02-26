@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Process;
 
 class ModulesTestCommand extends Command
 {
-    protected $signature = 'modules:test';
+    protected $signature = 'modules:test
+                            {--testdox : Report test execution progress in TestDox format}
+                            {--filter= : Filter which tests to run}';
 
     protected $description = 'Run PHPUnit tests for all local modules';
 
@@ -54,7 +56,20 @@ class ModulesTestCommand extends Command
                 '<fg=yellow>Running tests...</>'
             );
 
-            $result = Process::run([$phpunit, '--configuration', $phpunitXml]);
+            $bootstrap = base_path('vendor/autoload.php');
+
+            $cmd = [$phpunit, '--configuration', $phpunitXml, '--bootstrap', $bootstrap];
+
+            if ($this->option('testdox')) {
+                $cmd[] = '--testdox';
+            }
+
+            if ($filter = $this->option('filter')) {
+                $cmd[] = '--filter';
+                $cmd[] = $filter;
+            }
+
+            $result = Process::run($cmd);
 
             $this->line($result->output());
 
