@@ -111,6 +111,7 @@ class Modules
 
         if ($installed) {
             self::addTestsNamespaceToComposer($module);
+            Composer::dump();
         }
 
         return $installed;

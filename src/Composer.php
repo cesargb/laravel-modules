@@ -37,6 +37,19 @@ class Composer
         return $app->run($input) === 0;
     }
 
+    public static function dump(): bool
+    {
+        $app = new Application;
+        $app->setAutoExit(false);
+
+        $input = new ArrayInput([
+            'command' => 'dump-autoload',
+            '--working-dir' => base_path(),
+        ]);
+
+        return $app->run($input) === 0;
+    }
+
     public static function getVersion(): string
     {
         $app = new Application;
