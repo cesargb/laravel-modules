@@ -103,7 +103,63 @@ class Modules
 
         self::$cachedModules = null;
 
+        if ($installed) {
+            static::addTestsNamespaceToComposer($module);
+        }
+
         return $installed;
+    }
+
+    private static function addTestsNamespaceToComposer(Module $module): void
+    {
+        if ($module->origin !== 'local') {
+            return;
+        }
+
+        $appComposerPath = base_path('composer.json');
+
+        if (! file_exists($appComposerPath)) {
+            return;
+        }
+
+        $appComposer = json_decode(file_get_contents($appComposerPath), true);
+
+        if (! isset($appComposer['extra']['laravel_modules'][$module->name])) {
+            return;
+        }
+
+        $moduleComposerPath = Config::path().'/'.$module->name.'/composer.json';
+
+        if (! file_exists($moduleComposerPath)) {
+            return;
+        }
+
+        $moduleComposer = json_decode(file_get_contents($moduleComposerPath), true);
+        $testNamespaces = $moduleComposer['autoload-dev']['psr-4'] ?? [];
+
+        if (empty($testNamespaces)) {
+            return;
+        }
+
+        $moduleRelativePath = Config::directory().'/'.$module->name.'/';
+
+        $modified = false;
+
+        foreach ($testNamespaces as $namespace => $path) {
+            $fullPath = $moduleRelativePath.$path;
+
+            if (! isset($appComposer['autoload-dev']['psr-4'][$namespace])) {
+                $appComposer['autoload-dev']['psr-4'][$namespace] = $fullPath;
+                $modified = true;
+            }
+        }
+
+        if ($modified) {
+            file_put_contents(
+                $appComposerPath,
+                json_encode($appComposer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n"
+            );
+        }
     }
 
     public static function uninstall(string $name): bool
