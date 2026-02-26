@@ -183,6 +183,7 @@ class Modules
 
         if ($uninstalled) {
             self::removeTestsNamespaceFromComposer($module);
+            Composer::dump();
         }
 
         return $uninstalled;
