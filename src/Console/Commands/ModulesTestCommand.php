@@ -58,7 +58,7 @@ class ModulesTestCommand extends Command
 
             $bootstrap = base_path('vendor/autoload.php');
 
-            $cmd = [$phpunit, '--configuration', $phpunitXml, '--bootstrap', $bootstrap];
+            $cmd = [$phpunit, '--configuration', $phpunitXml, '--bootstrap', $bootstrap, '--colors=always'];
 
             if ($this->option('testdox')) {
                 $cmd[] = '--testdox';
@@ -71,11 +71,20 @@ class ModulesTestCommand extends Command
 
             $result = Process::run($cmd);
 
-            $this->line($result->output());
+            $output = implode("\n", array_slice(explode("\n", $result->output()), 4));
+
+            $this->output->write($output);
+
+            $this->newLine();
 
             if (! $result->successful()) {
                 $this->line($result->errorOutput());
                 $failed[] = $moduleName;
+            } else {
+                $this->components->twoColumnDetail(
+                    "<options=bold>{$moduleName}</>",
+                    '<fg=green>Tests passed</>'
+                );
             }
         }
 

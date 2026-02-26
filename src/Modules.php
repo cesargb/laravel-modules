@@ -17,7 +17,9 @@ class Modules
 
         $modules = glob(Config::path().'/*/composer.json');
 
-        self::$cachedModules = array_map(function ($composerJsonPath) {
+        $installedByName = array_column(static::packagesInstalled(), null, 'name');
+
+        self::$cachedModules = array_map(function ($composerJsonPath) use ($installedByName) {
             $moduleName = basename(dirname($composerJsonPath));
             $package = json_decode(file_get_contents($composerJsonPath), true);
             $namespace = $package['autoload']['psr-4'] ? array_key_first($package['autoload']['psr-4']) : null;
@@ -26,13 +28,17 @@ class Modules
                 throw new \Exception("Module {$moduleName} does not have a PSR-4 autoload namespace defined.", 1);
             }
 
+            $vendorPackage = $installedByName[$package['name']] ?? null;
+
             return new Module(
                 name: $moduleName,
                 packageName: $package['name'],
                 version: ($package['version'] ?? false) ? '^'.$package['version'] : '*',
                 installed: static::isInstalled($package['name']),
                 namespace: $namespace,
-                origin : $package['extra']['laravel-module']['origin'] ?? 'download'
+                origin: $package['extra']['laravel-module']['origin']
+                    ?? $vendorPackage['extra']['laravel-module']['origin']
+                    ?? 'download'
             );
         }, $modules ?: []);
 
