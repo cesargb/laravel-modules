@@ -174,7 +174,59 @@ class Modules
 
         self::$cachedModules = null;
 
+        if ($uninstalled) {
+            static::removeTestsNamespaceFromComposer($module);
+        }
+
         return $uninstalled;
+    }
+
+    private static function removeTestsNamespaceFromComposer(Module $module): void
+    {
+        if ($module->origin !== 'local') {
+            return;
+        }
+
+        $appComposerPath = base_path('composer.json');
+
+        if (! file_exists($appComposerPath)) {
+            return;
+        }
+
+        $appComposer = json_decode(file_get_contents($appComposerPath), true);
+
+        if (! isset($appComposer['extra']['laravel_modules'][$module->name])) {
+            return;
+        }
+
+        $moduleComposerPath = Config::path().'/'.$module->name.'/composer.json';
+
+        if (! file_exists($moduleComposerPath)) {
+            return;
+        }
+
+        $moduleComposer = json_decode(file_get_contents($moduleComposerPath), true);
+        $testNamespaces = $moduleComposer['autoload-dev']['psr-4'] ?? [];
+
+        if (empty($testNamespaces)) {
+            return;
+        }
+
+        $modified = false;
+
+        foreach ($testNamespaces as $namespace => $path) {
+            if (isset($appComposer['autoload-dev']['psr-4'][$namespace])) {
+                unset($appComposer['autoload-dev']['psr-4'][$namespace]);
+                $modified = true;
+            }
+        }
+
+        if ($modified) {
+            file_put_contents(
+                $appComposerPath,
+                json_encode($appComposer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n"
+            );
+        }
     }
 
     private static function packagesInstalled(): array
