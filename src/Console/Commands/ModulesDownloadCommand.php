@@ -91,7 +91,7 @@ class ModulesDownloadCommand extends Command
 
         $composer['extra']['laravel_modules'][$moduleName] = [
             'origin' => 'vsc',
-            'url'    => $repo,
+            'url' => $repo,
         ];
 
         file_put_contents(
