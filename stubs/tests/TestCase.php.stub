@@ -2,19 +2,9 @@
 
 namespace {{VENDOR}}\{{MODULE_NAME}}\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-abstract class TestCase extends Orchestra
+abstract class TestCase extends BaseTestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return [
-            \{{VENDOR}}\{{MODULE_NAME}}\{{MODULE_NAME}}ServiceProvider::class,
-        ];
-    }
 
-    protected function getEnvironmentSetUp($app)
-    {
-        // Setup default environment
-    }
 }
